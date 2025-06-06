@@ -1,0 +1,24 @@
+name: Test CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Test
+    runs-on: windows-2025
+
+    steps:
+      
+      - name: Export Path
+        shell: pwsh
+        run: |
+          "C:/Test1" | Out-File -FilePath "$env:GITHUB_PATH" -Append
+          echo "C:/Test2" | Out-File -FilePath "$env:GITHUB_PATH" -Append
+
+      - name: Echo Path
+        run: |
+          echo "PATH=$env:PATH"
